@@ -66,3 +66,10 @@ ints.
   `bool` subclasses `int`, because passing `True` is almost certainly a bug.
 * An empty file yields the digest of `b""`, and the progress callback is
   not invoked for it.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
